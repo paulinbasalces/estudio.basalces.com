@@ -188,10 +188,11 @@ header {
     right: 0;
     z-index: 100;
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    background: transparent;
+    background: rgba(250, 249, 246, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
-/* Estado inicial: integrado ao fundo */
 header .header-content {
     display: flex;
     justify-content: space-between;
@@ -217,19 +218,17 @@ header.scrolled .header-content {
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-radius: 50px;
     padding: 0.8rem 2rem;
-    box-shadow: 
+    box-shadow:
         0 4px 30px rgba(0, 0, 0, 0.08),
         0 1px 3px rgba(0, 0, 0, 0.05),
         inset 0 1px 0 rgba(255, 255, 255, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-/* Ajuste do logo no estado flutuante */
 header.scrolled .logo {
     font-size: 1.5rem;
 }
 
-/* Ajuste dos botões no estado flutuante */
 header.scrolled .whatsapp-header {
     padding: 0.5rem 1.2rem;
     font-size: 0.85rem;
@@ -240,11 +239,15 @@ header.scrolled .theme-toggle {
     height: 26px;
 }
 
-/* Dark mode do header flutuante */
+/* Dark mode do header */
+body.dark-mode header {
+    background: rgba(26, 26, 26, 0.85);
+}
+
 body.dark-mode header.scrolled .header-content {
     background: rgba(26, 26, 26, 0.75);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 
+    box-shadow:
         0 4px 30px rgba(0, 0, 0, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
@@ -261,12 +264,11 @@ body.dark-mode header.scrolled .header-content {
     align-items: center;
 }
 
-/* Grid de fundo sutil (inspirado no Botmaker) */
 .hero::before {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: 
+    background-image:
         linear-gradient(rgba(26, 26, 26, 0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(26, 26, 26, 0.03) 1px, transparent 1px);
     background-size: 60px 60px;
@@ -275,7 +277,6 @@ body.dark-mode header.scrolled .header-content {
     z-index: 0;
 }
 
-/* Gradiente radial de fundo */
 .hero::after {
     content: '';
     position: absolute;
@@ -422,7 +423,6 @@ body.dark-mode header.scrolled .header-content {
     margin-left: 0;
 }
 
-/* Elemento visual do hero (card flutuante) */
 .hero-visual {
     position: relative;
     display: flex;
@@ -434,7 +434,7 @@ body.dark-mode header.scrolled .header-content {
     background: white;
     border-radius: 20px;
     padding: 2rem;
-    box-shadow: 
+    box-shadow:
         0 25px 60px rgba(0, 0, 0, 0.12),
         0 0 0 1px rgba(0, 0, 0, 0.05);
     transform: rotate(3deg);
@@ -508,7 +508,6 @@ body.dark-mode header.scrolled .header-content {
     font-weight: 500;
 }
 
-/* Badge flutuante de urgência */
 .urgency-float {
     position: absolute;
     top: -20px;
@@ -527,59 +526,6 @@ body.dark-mode header.scrolled .header-content {
 @keyframes bounce-float {
     0%, 100% { transform: translateY(0) rotate(-5deg); }
     50% { transform: translateY(-10px) rotate(0deg); }
-}
-
-/* Responsividade do hero */
-@media (max-width: 900px) {
-    .hero-content {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-        text-align: center;
-    }
-
-    .hero-text {
-        text-align: center;
-    }
-
-    .hero-description {
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .hero-buttons {
-        justify-content: center;
-    }
-
-    .hero-social-proof {
-        justify-content: center;
-    }
-
-    .hero-card {
-        transform: rotate(0deg);
-        max-width: 320px;
-        margin: 0 auto;
-    }
-
-    .urgency-float {
-        top: -15px;
-        right: 10px;
-    }
-}
-
-@media (max-width: 768px) {
-    .hero {
-        padding: 120px 0 60px;
-        min-height: auto;
-    }
-
-    header.scrolled .header-content {
-        max-width: 98%;
-        padding: 0.6rem 1.2rem;
-    }
-
-    header.scrolled .logo {
-        font-size: 1.3rem;
-    }
 }
 
 /* Navegação Desktop */
@@ -682,7 +628,6 @@ body.dark-mode .theme-toggle::before {
     transform: rotate(-45deg) translate(6px, -6px);
 }
 
-/* Menu Mobile */
 .mobile-nav {
     position: fixed;
     top: 0;
@@ -733,7 +678,6 @@ body.dark-mode .theme-toggle::before {
     opacity: 1;
     visibility: visible;
 }
-
 
 /* --- DIVISORES ENTRE SEÇÕES --- */
 .section-divider {
@@ -792,7 +736,7 @@ body.dark-mode .theme-toggle::before {
     transform: rotate(360deg);
 }
 
-/* --- STATS (Por que ter um site) --- */
+/* --- STATS --- */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -1010,7 +954,7 @@ body.dark-mode .theme-toggle::before {
     font-size: 1.1rem;
 }
 
-/* --- TIMELINE (Como Funciona) --- */
+/* --- TIMELINE --- */
 .timeline {
     margin-top: 4rem;
     position: relative;
@@ -1096,7 +1040,7 @@ body.dark-mode .theme-toggle::before {
     color: #5A5A5A;
 }
 
-/* --- QUEM ESTÁ POR TRÁS (Founder) --- */
+/* --- FOUNDER --- */
 .founder-section {
     background: linear-gradient(135deg, #FF5841 0%, #C53678 100%);
     color: white;
@@ -1240,7 +1184,7 @@ body.dark-mode .theme-toggle::before {
     box-shadow: 0 10px 30px rgba(0, 119, 181, 0.3);
 }
 
-/* --- PREÇO (Pricing) --- */
+/* --- PRICING --- */
 .pricing-wrapper {
     margin-top: 4rem;
     display: flex;
@@ -1505,27 +1449,37 @@ body.dark-mode .theme-toggle::before {
     background: #1877F2;
 }
 
-/* --- FOOTER --- */
 /* ========================================
-   FOOTER PROFISSIONAL COM GLASSMORPHISM
+   FOOTER PROFISSIONAL (DARK)
    ======================================== */
 .footer {
-    background: linear-gradient(180deg, #FAFAF8 0%, #F5F3EF 100%);
+    background: linear-gradient(180deg, #1A1A1A 0%, #0F0F0F 100%);
     padding: 5rem 0 2rem;
-    border-top: 1px solid rgba(26, 26, 26, 0.1);
     position: relative;
     overflow: hidden;
+    color: #FAFAF8;
 }
 
-/* Efeito de gradiente sutil no fundo */
+/* Linha de destaque no topo do footer */
 .footer::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 200px;
-    background: linear-gradient(180deg, rgba(255, 88, 65, 0.03) 0%, transparent 100%);
+    height: 4px;
+    background: linear-gradient(90deg, #FF5841 0%, #C53678 100%);
+}
+
+/* Gradiente sutil de fundo */
+.footer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 300px;
+    background: radial-gradient(ellipse at top, rgba(255, 88, 65, 0.08) 0%, transparent 70%);
     pointer-events: none;
 }
 
@@ -1538,7 +1492,6 @@ body.dark-mode .theme-toggle::before {
     z-index: 1;
 }
 
-/* Coluna da marca */
 .footer-brand {
     max-width: 320px;
 }
@@ -1546,7 +1499,7 @@ body.dark-mode .theme-toggle::before {
 .footer-logo {
     font-size: 2rem;
     font-weight: 800;
-    color: #1A1A1A;
+    color: #FAFAF8;
     margin-bottom: 1rem;
     display: inline-block;
     text-decoration: none;
@@ -1559,7 +1512,7 @@ body.dark-mode .theme-toggle::before {
 .footer-description {
     font-size: 0.95rem;
     line-height: 1.6;
-    color: #5A5A5A;
+    color: #B8B8B8;
     margin-bottom: 1.5rem;
 }
 
@@ -1571,28 +1524,28 @@ body.dark-mode .theme-toggle::before {
 .social-link {
     width: 40px;
     height: 40px;
-    background: white;
+    background: rgba(255, 255, 255, 0.08);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #1A1A1A;
+    color: #FAFAF8;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .social-link:hover {
     background: #FF5841;
     color: white;
     transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(255, 88, 65, 0.3);
+    box-shadow: 0 5px 15px rgba(255, 88, 65, 0.4);
+    border-color: #FF5841;
 }
 
-/* Colunas de navegação */
 .footer-heading {
     font-size: 1rem;
     font-weight: 700;
-    color: #1A1A1A;
+    color: #FAFAF8;
     margin-bottom: 1.2rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -1607,10 +1560,10 @@ body.dark-mode .theme-toggle::before {
 }
 
 .footer-links a {
-    color: #5A5A5A;
+    color: #B8B8B8;
     text-decoration: none;
     font-size: 0.95rem;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
     display: inline-block;
 }
 
@@ -1619,10 +1572,9 @@ body.dark-mode .theme-toggle::before {
     transform: translateX(5px);
 }
 
-/* Coluna de compartilhamento */
 .footer-share-text {
     font-size: 0.9rem;
-    color: #5A5A5A;
+    color: #B8B8B8;
     margin-bottom: 1rem;
     line-height: 1.5;
 }
@@ -1648,7 +1600,7 @@ body.dark-mode .theme-toggle::before {
 
 .footer-share .share-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .footer-share .share-btn.whatsapp {
@@ -1659,14 +1611,14 @@ body.dark-mode .theme-toggle::before {
     background: #0077b5;
 }
 
-/* Divider */
 .footer-divider {
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(26, 26, 26, 0.1), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
     margin: 2rem 0;
+    position: relative;
+    z-index: 1;
 }
 
-/* Footer bottom */
 .footer-bottom {
     text-align: center;
     position: relative;
@@ -1675,96 +1627,14 @@ body.dark-mode .theme-toggle::before {
 
 .footer-copyright {
     font-size: 0.9rem;
-    color: #5A5A5A;
+    color: #B8B8B8;
     margin-bottom: 0.5rem;
 }
 
 .footer-credits {
     font-size: 0.85rem;
-    color: #5A5A5A;
-    opacity: 0.8;
-}
-
-/* Dark mode do footer */
-body.dark-mode .footer {
-    background: linear-gradient(180deg, #1A1A1A 0%, #242424 100%);
-    border-top-color: rgba(255, 255, 255, 0.1);
-}
-
-body.dark-mode .footer::before {
-    background: linear-gradient(180deg, rgba(255, 88, 65, 0.05) 0%, transparent 100%);
-}
-
-body.dark-mode .footer-logo {
-    color: #FAFAF8;
-}
-
-body.dark-mode .footer-description,
-body.dark-mode .footer-links a,
-body.dark-mode .footer-share-text,
-body.dark-mode .footer-copyright,
-body.dark-mode .footer-credits {
     color: #B8B8B8;
-}
-
-body.dark-mode .footer-heading {
-    color: #FAFAF8;
-}
-
-body.dark-mode .social-link {
-    background: #2D2D2D;
-    color: #FAFAF8;
-}
-
-body.dark-mode .social-link:hover {
-    background: #FF5841;
-    color: white;
-}
-
-body.dark-mode .footer-divider {
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-}
-
-/* Responsividade do footer */
-@media (max-width: 900px) {
-    .footer-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 2rem;
-    }
-
-    .footer-brand {
-        grid-column: 1 / -1;
-        max-width: 100%;
-    }
-
-    .footer-share {
-        grid-column: 1 / -1;
-    }
-}
-
-@media (max-width: 600px) {
-    .footer {
-        padding: 3rem 0 1.5rem;
-    }
-
-    .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
-    .footer-brand,
-    .footer-share {
-        grid-column: 1;
-    }
-
-    .footer-share .share-buttons {
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
-
-    .footer-logo {
-        font-size: 1.8rem;
-    }
+    opacity: 0.7;
 }
 
 /* --- BOTÕES FLUTUANTES --- */
@@ -1859,10 +1729,6 @@ body.dark-mode p {
     color: #B8B8B8;
 }
 
-body.dark-mode header {
-    background: #1A1A1A;
-}
-
 body.dark-mode .logo {
     color: #FAFAF8;
 }
@@ -1930,15 +1796,6 @@ body.dark-mode .faq-answer {
 
 body.dark-mode .faq-item {
     border-color: #3D3D3D;
-}
-
-body.dark-mode footer {
-    background: #242424;
-    border-color: #3D3D3D;
-}
-
-body.dark-mode .footer-logo {
-    color: #FAFAF8;
 }
 
 body.dark-mode .btn-outline {
@@ -2038,6 +1895,56 @@ body.dark-mode .mobile-menu-toggle span {
 }
 
 /* --- RESPONSIVIDADE --- */
+@media (max-width: 900px) {
+    .hero-content {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+    }
+
+    .hero-text {
+        text-align: center;
+    }
+
+    .hero-description {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-social-proof {
+        justify-content: center;
+    }
+
+    .hero-card {
+        transform: rotate(0deg);
+        max-width: 320px;
+        margin: 0 auto;
+    }
+
+    .urgency-float {
+        top: -15px;
+        right: 10px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+        max-width: 100%;
+    }
+
+    .footer-share {
+        grid-column: 1 / -1;
+    }
+}
+
 @media (max-width: 768px) {
     .desktop-nav {
         display: none;
@@ -2052,7 +1959,17 @@ body.dark-mode .mobile-menu-toggle span {
     }
 
     .hero {
-        padding: 100px 0 60px;
+        padding: 120px 0 60px;
+        min-height: auto;
+    }
+
+    header.scrolled .header-content {
+        max-width: 98%;
+        padding: 0.6rem 1.2rem;
+    }
+
+    header.scrolled .logo {
+        font-size: 1.3rem;
     }
 
     .pricing-card {
@@ -2126,6 +2043,29 @@ body.dark-mode .mobile-menu-toggle span {
 
     .container {
         padding: 0 1.5rem;
+    }
+
+    .footer {
+        padding: 3rem 0 1.5rem;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .footer-brand,
+    .footer-share {
+        grid-column: 1;
+    }
+
+    .footer-share .share-buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .footer-logo {
+        font-size: 1.8rem;
     }
 }
 
