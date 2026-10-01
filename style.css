@@ -178,7 +178,7 @@ p {
 }
 
 /* ========================================
-   HEADER FLUTUANTE COM GLASSMORPHISM
+   HEADER FLUTUANTE (PILL STYLE - BOTMAKER)
    ======================================== */
 header {
     padding: 1.5rem 0;
@@ -188,9 +188,6 @@ header {
     right: 0;
     z-index: 100;
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    background: rgba(250, 249, 246, 0.85);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
 }
 
 header .header-content {
@@ -204,16 +201,16 @@ header .header-content {
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Estado flutuante (após scroll) */
+/* Estado flutuante (após scroll) - apenas uma pill */
 header.scrolled {
     padding: 0.8rem 0;
 }
 
 header.scrolled .header-content {
-    max-width: 95%;
+    max-width: 900px;
     width: fit-content;
     margin: 0 auto;
-    background: rgba(250, 249, 246, 0.75);
+    background: rgba(250, 249, 246, 0.85);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     border-radius: 50px;
@@ -225,7 +222,7 @@ header.scrolled .header-content {
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-/* Logo - com especificidade alta para sobrescrever estilos de link */
+/* Logo - com especificidade máxima */
 header .logo,
 header a.logo {
     font-size: 1.8rem;
@@ -272,13 +269,9 @@ header.scrolled .theme-toggle {
     height: 26px;
 }
 
-/* Dark mode do header */
-body.dark-mode header {
-    background: rgba(26, 26, 26, 0.85);
-}
-
+/* Dark mode do header flutuante */
 body.dark-mode header.scrolled .header-content {
-    background: rgba(26, 26, 26, 0.75);
+    background: rgba(26, 26, 26, 0.85);
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow:
         0 4px 30px rgba(0, 0, 0, 0.3),
@@ -1073,20 +1066,34 @@ body.dark-mode .theme-toggle::before {
     color: #5A5A5A;
 }
 
-/* --- FOUNDER --- */
+/* ========================================
+   FOUNDER - SEÇÃO PROFISSIONAL
+   ======================================== */
 .founder-section {
     background: linear-gradient(135deg, #FF5841 0%, #C53678 100%);
     color: white;
-    padding: 5rem 0;
+    padding: 6rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.founder-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    pointer-events: none;
 }
 
 .founder-card {
     background: white;
     border-radius: 24px;
-    padding: 3rem 2.5rem;
-    max-width: 800px;
-    margin: 3rem auto 0;
-    text-align: center;
+    padding: 4rem 3rem;
+    max-width: 900px;
+    margin: 0 auto;
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
     position: relative;
     overflow: hidden;
@@ -1105,36 +1112,36 @@ body.dark-mode .theme-toggle::before {
 .founder-header {
     display: flex;
     align-items: center;
-    gap: 2rem;
-    margin-bottom: 2rem;
-    text-align: left;
-    flex-wrap: wrap;
-    justify-content: center;
+    gap: 2.5rem;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid #F5F3EF;
 }
 
 .founder-avatar {
-    width: 120px;
-    height: 120px;
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
     background: linear-gradient(135deg, #FF5841, #C53678);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3.5rem;
+    font-size: 4rem;
     color: white;
-    border: 5px solid #FAFAF8;
+    border: 6px solid #FAFAF8;
     flex-shrink: 0;
+    box-shadow: 0 10px 30px rgba(255, 88, 65, 0.3);
 }
 
 .founder-info h3 {
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     font-weight: 800;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.5rem;
     color: #1A1A1A;
 }
 
 .founder-info p {
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: #5A5A5A;
     font-weight: 500;
     margin: 0;
@@ -1142,12 +1149,13 @@ body.dark-mode .theme-toggle::before {
 
 .founder-highlights {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 1rem;
-    margin: 2rem 0;
-    padding: 1.5rem;
-    background: #F5F3EF;
-    border-radius: 12px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin: 2.5rem 0;
+    padding: 2rem;
+    background: linear-gradient(135deg, #FAFAF8 0%, #F5F3EF 100%);
+    border-radius: 16px;
+    border: 1px solid rgba(26, 26, 26, 0.05);
 }
 
 .highlight-item {
@@ -1155,66 +1163,73 @@ body.dark-mode .theme-toggle::before {
 }
 
 .highlight-number {
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     font-weight: 800;
     color: #FF5841;
     display: block;
     line-height: 1;
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.5rem;
 }
 
 .highlight-label {
     font-size: 0.85rem;
     color: #5A5A5A;
     font-weight: 500;
+    line-height: 1.3;
 }
 
 .founder-bio {
-    font-size: 1rem;
-    line-height: 1.7;
+    font-size: 1.05rem;
+    line-height: 1.8;
     color: #5A5A5A;
-    text-align: left;
     margin-bottom: 1.5rem;
 }
 
 .founder-bio strong {
     color: #1A1A1A;
+    font-weight: 700;
 }
 
 .founder-credentials {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.8rem;
+    gap: 1rem;
     justify-content: center;
-    margin: 1.5rem 0;
+    margin: 2.5rem 0;
+    padding: 1.5rem;
+    background: #FAFAF8;
+    border-radius: 12px;
 }
 
 .credential-tag {
-    background: #F5F3EF;
-    padding: 0.5rem 1rem;
+    background: white;
+    padding: 0.6rem 1.2rem;
     border-radius: 50px;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: #1A1A1A;
+    border: 1px solid rgba(26, 26, 26, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .founder-linkedin {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     background: #0077b5;
     color: white;
-    padding: 1rem 2rem;
+    padding: 1.2rem 2.5rem;
     border-radius: 50px;
     text-decoration: none;
     font-weight: 700;
+    font-size: 1.05rem;
     transition: all 0.3s ease;
-    margin-top: 1rem;
+    box-shadow: 0 5px 20px rgba(0, 119, 181, 0.3);
 }
 
 .founder-linkedin:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(0, 119, 181, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 119, 181, 0.4);
 }
 
 /* --- PRICING --- */
@@ -1493,7 +1508,6 @@ body.dark-mode .theme-toggle::before {
     color: #FAFAF8;
 }
 
-/* Linha de destaque no topo do footer */
 .footer::before {
     content: '';
     position: absolute;
@@ -1504,7 +1518,6 @@ body.dark-mode .theme-toggle::before {
     background: linear-gradient(90deg, #FF5841 0%, #C53678 100%);
 }
 
-/* Gradiente sutil de fundo */
 .footer::after {
     content: '';
     position: absolute;
@@ -1532,14 +1545,14 @@ body.dark-mode .theme-toggle::before {
 .footer-logo {
     font-size: 2rem;
     font-weight: 800;
-    color: #FAFAF8;
+    color: #FAFAF8 !important;
     margin-bottom: 1rem;
     display: inline-block;
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 .footer-logo span {
-    color: #FF5841;
+    color: #FF5841 !important;
 }
 
 .footer-description {
@@ -1763,7 +1776,7 @@ body.dark-mode p {
 }
 
 body.dark-mode .logo {
-    color: #FAFAF8;
+    color: #FAFAF8 !important;
 }
 
 body.dark-mode .theme-toggle {
@@ -1963,6 +1976,15 @@ body.dark-mode .mobile-menu-toggle span {
         right: 10px;
     }
 
+    .founder-header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .founder-highlights {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     .footer-grid {
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
@@ -2050,11 +2072,6 @@ body.dark-mode .mobile-menu-toggle span {
         font-size: 1.3rem;
         bottom: 20px;
         left: 20px;
-    }
-
-    .founder-header {
-        flex-direction: column;
-        text-align: center;
     }
 
     .founder-highlights {
