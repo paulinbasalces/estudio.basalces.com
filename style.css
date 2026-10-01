@@ -225,8 +225,41 @@ header.scrolled .header-content {
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-header.scrolled .logo {
+/* Logo - com especificidade alta para sobrescrever estilos de link */
+header .logo,
+header a.logo {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #1A1A1A !important;
+    text-decoration: none !important;
+    transition: color 0.3s ease;
+}
+
+header .logo:hover,
+header a.logo:hover {
+    color: #FF5841 !important;
+}
+
+header .logo span,
+header a.logo span {
+    color: #FF5841 !important;
+}
+
+/* Estado flutuante do logo */
+header.scrolled .logo,
+header.scrolled a.logo {
     font-size: 1.5rem;
+}
+
+/* Dark mode do logo */
+body.dark-mode header .logo,
+body.dark-mode header a.logo {
+    color: #FAFAF8 !important;
+}
+
+body.dark-mode header .logo:hover,
+body.dark-mode header a.logo:hover {
+    color: #FF5841 !important;
 }
 
 header.scrolled .whatsapp-header {
