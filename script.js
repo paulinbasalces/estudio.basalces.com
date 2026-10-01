@@ -12,6 +12,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- 0. Header Flutuante com Glassmorphism ---
+const mainHeader = document.getElementById('mainHeader');
+if (mainHeader) {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            mainHeader.classList.add('scrolled');
+        } else {
+            mainHeader.classList.remove('scrolled');
+        }
+    });
+}
+    
     // --- 2. Mobile Menu ---
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     const mobileNav = document.getElementById('mobileNav');
