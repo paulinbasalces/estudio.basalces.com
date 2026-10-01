@@ -1506,24 +1506,265 @@ body.dark-mode .theme-toggle::before {
 }
 
 /* --- FOOTER --- */
-footer {
-    padding: 4rem 0 2rem;
-    text-align: center;
-    border-top: 2px solid #1A1A1A;
-    background: white;
+/* ========================================
+   FOOTER PROFISSIONAL COM GLASSMORPHISM
+   ======================================== */
+.footer {
+    background: linear-gradient(180deg, #FAFAF8 0%, #F5F3EF 100%);
+    padding: 5rem 0 2rem;
+    border-top: 1px solid rgba(26, 26, 26, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efeito de gradiente sutil no fundo */
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(180deg, rgba(255, 88, 65, 0.03) 0%, transparent 100%);
+    pointer-events: none;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Coluna da marca */
+.footer-brand {
+    max-width: 320px;
 }
 
 .footer-logo {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 800;
     color: #1A1A1A;
     margin-bottom: 1rem;
-    display: block;
+    display: inline-block;
     text-decoration: none;
 }
 
 .footer-logo span {
     color: #FF5841;
+}
+
+.footer-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #5A5A5A;
+    margin-bottom: 1.5rem;
+}
+
+.footer-social {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1A1A1A;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.social-link:hover {
+    background: #FF5841;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 88, 65, 0.3);
+}
+
+/* Colunas de navegação */
+.footer-heading {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1A1A1A;
+    margin-bottom: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-links a {
+    color: #5A5A5A;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease;
+    display: inline-block;
+}
+
+.footer-links a:hover {
+    color: #FF5841;
+    transform: translateX(5px);
+}
+
+/* Coluna de compartilhamento */
+.footer-share-text {
+    font-size: 0.9rem;
+    color: #5A5A5A;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.footer-share .share-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.footer-share .share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.7rem 1.2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    color: white;
+}
+
+.footer-share .share-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.footer-share .share-btn.whatsapp {
+    background: #25D366;
+}
+
+.footer-share .share-btn.linkedin {
+    background: #0077b5;
+}
+
+/* Divider */
+.footer-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(26, 26, 26, 0.1), transparent);
+    margin: 2rem 0;
+}
+
+/* Footer bottom */
+.footer-bottom {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.footer-copyright {
+    font-size: 0.9rem;
+    color: #5A5A5A;
+    margin-bottom: 0.5rem;
+}
+
+.footer-credits {
+    font-size: 0.85rem;
+    color: #5A5A5A;
+    opacity: 0.8;
+}
+
+/* Dark mode do footer */
+body.dark-mode .footer {
+    background: linear-gradient(180deg, #1A1A1A 0%, #242424 100%);
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .footer::before {
+    background: linear-gradient(180deg, rgba(255, 88, 65, 0.05) 0%, transparent 100%);
+}
+
+body.dark-mode .footer-logo {
+    color: #FAFAF8;
+}
+
+body.dark-mode .footer-description,
+body.dark-mode .footer-links a,
+body.dark-mode .footer-share-text,
+body.dark-mode .footer-copyright,
+body.dark-mode .footer-credits {
+    color: #B8B8B8;
+}
+
+body.dark-mode .footer-heading {
+    color: #FAFAF8;
+}
+
+body.dark-mode .social-link {
+    background: #2D2D2D;
+    color: #FAFAF8;
+}
+
+body.dark-mode .social-link:hover {
+    background: #FF5841;
+    color: white;
+}
+
+body.dark-mode .footer-divider {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+/* Responsividade do footer */
+@media (max-width: 900px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+        max-width: 100%;
+    }
+
+    .footer-share {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer {
+        padding: 3rem 0 1.5rem;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .footer-brand,
+    .footer-share {
+        grid-column: 1;
+    }
+
+    .footer-share .share-buttons {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .footer-logo {
+        font-size: 1.8rem;
+    }
 }
 
 /* --- BOTÕES FLUTUANTES --- */
