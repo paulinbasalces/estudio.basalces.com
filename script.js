@@ -5,7 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // --- 1. THEME TOGGLE (Dark Mode) ---
+  // --- 1. THEME TOGGLE ---
   const themeToggle = document.getElementById('themeToggle');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
@@ -40,22 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- 2. HEADER FLUTUANTE (Performance: requestAnimationFrame) ---
-  const mainHeader = document.getElementById('mainHeader');
-  if (mainHeader) {
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          mainHeader.classList.toggle('scrolled', window.scrollY > 50);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }, { passive: true });
-  }
-
-  // --- 3. MOBILE MENU (A11Y: Focus trap e Escape) ---
+  // --- 2. MOBILE MENU ---
   const mobileMenuToggle = document.getElementById('mobileMenuToggle');
   const mobileNav = document.getElementById('mobileNav');
   const mobileOverlay = document.getElementById('mobileOverlay');
@@ -87,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // --- 4. BACK TO TOP ---
+  // --- 3. BACK TO TOP ---
   const backToTopBtn = document.getElementById('backToTop');
   if (backToTopBtn) {
     let btTicking = false;
@@ -106,11 +91,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- 5. SCROLL ANIMATIONS (Respeita prefers-reduced-motion) ---
+  // --- 4. SCROLL ANIMATIONS ---
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   if (!prefersReducedMotion.matches) {
-    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -40px 0px' };
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -125,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
   }
 
-  // --- 6. SHARE BUTTONS ---
+  // --- 5. SHARE BUTTONS ---
   const currentUrl = window.location.href;
   const shareText = encodeURIComponent('Conheci o Estúdio Basalces e achei incrível! Sites profissionais com suporte humano e previsibilidade orçamentária. Dá uma olhada:');
 
