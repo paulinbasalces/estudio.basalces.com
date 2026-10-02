@@ -534,9 +534,7 @@ HERO
   font-weight: 500;
 }
 
-/* ========================================
-SHAPE DIVIDERS (Ondas suaves entre seções)
-======================================== */
+/* --- DIVISORES ENTRE SEÇÕES (CORRIGIDO) --- */
 .section-divider {
   position: absolute;
   bottom: 0;
@@ -544,7 +542,7 @@ SHAPE DIVIDERS (Ondas suaves entre seções)
   width: 100%;
   overflow: hidden;
   line-height: 0;
-  transform: rotate(180deg);
+  /* REMOVIDO: transform: rotate(180deg) que invertia as curvas */
 }
 
 .section-divider svg {
@@ -554,10 +552,31 @@ SHAPE DIVIDERS (Ondas suaves entre seções)
   height: 80px;
 }
 
-.section-divider-flip {
-  transform: rotate(0deg);
-  bottom: auto;
+/* Para divisores no topo da seção (flip vertical) */
+.section-divider-top {
+  position: absolute;
   top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.section-divider-top svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 80px;
+}
+
+/* Dark mode dos divisores */
+body.dark-mode .section-divider svg path {
+  fill: #242424;
+}
+
+body.dark-mode .section-divider-top svg path {
+  fill: #1A1A1A;
 }
 
 /* Navegação Desktop */
