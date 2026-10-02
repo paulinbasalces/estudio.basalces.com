@@ -125,30 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
   }
 
-  // --- 6. FAQ ACCORDION (A11Y completo) ---
-  document.querySelectorAll('.faq-question').forEach(button => {
-    button.addEventListener('click', () => {
-      const item = button.parentElement;
-      const isActive = item.classList.contains('active');
-      const answerId = button.getAttribute('aria-controls');
-      const answer = document.getElementById(answerId);
-
-      // Fecha todos
-      document.querySelectorAll('.faq-item').forEach(i => {
-        i.classList.remove('active');
-        const btn = i.querySelector('.faq-question');
-        if (btn) btn.setAttribute('aria-expanded', 'false');
-      });
-
-      // Abre o clicado se não estava ativo
-      if (!isActive) {
-        item.classList.add('active');
-        button.setAttribute('aria-expanded', 'true');
-      }
-    });
-  });
-
-  // --- 7. SHARE BUTTONS ---
+  // --- 6. SHARE BUTTONS ---
   const currentUrl = window.location.href;
   const shareText = encodeURIComponent('Conheci o Estúdio Basalces e achei incrível! Sites profissionais com suporte humano e previsibilidade orçamentária. Dá uma olhada:');
 
