@@ -6,20 +6,17 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // --- 1. THEME TOGGLE (Dark Mode) ---
-  // Respeita preferência do sistema + persistência via localStorage
   const themeToggle = document.getElementById('themeToggle');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
   function applyTheme(dark) {
     document.body.classList.toggle('dark-mode', dark);
     if (themeToggle) {
-      themeToggle.setAttribute('aria-label',
-        dark ? 'Alternar para tema claro' : 'Alternar para tema escuro'
-      );
+      themeToggle.setAttribute('aria-pressed', String(dark));
+      themeToggle.setAttribute('aria-label', dark ? 'Alternar para tema claro' : 'Alternar para tema escuro');
     }
   }
 
-  // Inicializa: localStorage > system preference
   const stored = localStorage.getItem('theme');
   if (stored === 'dark') {
     applyTheme(true);
@@ -29,7 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
     applyTheme(prefersDark.matches);
   }
 
-  // Escuta mudanças no SO
   prefersDark.addEventListener('change', (e) => {
     if (!localStorage.getItem('theme')) {
       applyTheme(e.matches);
@@ -44,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- 2. HEADER FLUTUANTE ---
+  // --- 2. HEADER FLUTUANTE (Performance: requestAnimationFrame) ---
   const mainHeader = document.getElementById('mainHeader');
   if (mainHeader) {
     let ticking = false;
@@ -59,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
-  // --- 3. MOBILE MENU ---
+  // --- 3. MOBILE MENU (A11Y: Focus trap e Escape) ---
   const mobileMenuToggle = document.getElementById('mobileMenuToggle');
   const mobileNav = document.getElementById('mobileNav');
   const mobileOverlay = document.getElementById('mobileOverlay');
@@ -74,7 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileOverlay.setAttribute('aria-hidden', String(!isOpen));
     document.body.style.overflow = isOpen ? 'hidden' : '';
 
-    // Focus trap básico
     if (isOpen) {
       const firstLink = mobileNav.querySelector('a');
       if (firstLink) firstLink.focus();
@@ -85,7 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (mobileOverlay) mobileOverlay.addEventListener('click', toggleMenu);
   mobileLinks.forEach(link => link.addEventListener('click', toggleMenu));
 
-  // Fecha com Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && mobileNav && mobileNav.classList.contains('active')) {
       toggleMenu();
@@ -112,16 +106,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- 5. SCROLL ANIMATIONS (Intersection Observer) ---
-  // Respeita prefers-reduced-motion
+  // --- 5. SCROLL ANIMATIONS (Respeita prefers-reduced-motion) ---
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   if (!prefersReducedMotion.matches) {
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -133,7 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   } else {
-    // Se o usuário prefere movimento reduzido, mostra tudo imediatamente
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('active'));
   }
 
@@ -158,20 +146,11 @@ document.addEventListener('DOMContentLoaded', () => {
         button.setAttribute('aria-expanded', 'true');
       }
     });
-
-    // Suporte a teclado (Enter e Space já funcionam nativamente com <button>)
   });
 
-  // --- 7. WHATSAPP DYNAMIC LINKS ---
-  const whatsappNumber = '553198447001';
-  const message = encodeURIComponent('Olá! Gostei da proposta do Estúdio Basalces e gostaria de saber mais detalhes.');
-  document.querySelectorAll('a[href="#contato"]').forEach(link => {
-    link.href = `https://wa.me/${whatsappNumber}?text=${message}`;
-  });
-
-  // --- 8. SHARE BUTTONS ---
+  // --- 7. SHARE BUTTONS ---
   const currentUrl = window.location.href;
-  const shareText = encodeURIComponent('Conheci o Estúdio Basalces e achei incrível! Sites profissionais com suporte incluso. Dá uma olhada:');
+  const shareText = encodeURIComponent('Conheci o Estúdio Basalces e achei incrível! Sites profissionais com suporte humano e previsibilidade orçamentária. Dá uma olhada:');
 
   document.querySelectorAll('[data-share]').forEach(btn => {
     btn.addEventListener('click', function(e) {
@@ -183,14 +162,8 @@ document.addEventListener('DOMContentLoaded', () => {
         case 'whatsapp':
           shareUrl = `https://wa.me/?text=${shareText}%20${encodeURIComponent(currentUrl)}`;
           break;
-        case 'twitter':
-          shareUrl = `https://twitter.com/intent/tweet?text=${shareText}&url=${encodeURIComponent(currentUrl)}`;
-          break;
         case 'linkedin':
           shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`;
-          break;
-        case 'facebook':
-          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`;
           break;
       }
 
