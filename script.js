@@ -2,7 +2,6 @@
 // ESTÚDIO BASALCES - SCRIPT PRINCIPAL
 // ========================================
 document.addEventListener('DOMContentLoaded', () => {
-
   // --- 1. Theme Toggle (Dark Mode) ---
   const themeToggle = document.getElementById('themeToggle');
   if (themeToggle) {
@@ -154,5 +153,4 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
-
 });
