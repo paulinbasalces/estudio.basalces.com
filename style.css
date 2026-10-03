@@ -1,5 +1,5 @@
 /* ========================================
-ESTÚDIO BASALCES - FOLHA DE ESTILOS
+ESTÚDIO BASALCES - FOLHA DE ESTILOS COMPLETA
 Paleta: Off-White, Laranja Pôr do Sol, Vermelho-Violeta
 ======================================== */
 
@@ -189,7 +189,7 @@ p {
 }
 
 /* ========================================
-HEADER FLUTUANTE (PILL STYLE) - CORRIGIDO
+HEADER FLUTUANTE
 ======================================== */
 header {
   padding: 1.5rem 0;
@@ -199,13 +199,14 @@ header {
   right: 0;
   z-index: 100;
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background: transparent;
 }
 
 header .header-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: nowrap; /* CORREÇÃO: evita quebra */
+  flex-wrap: nowrap;
   gap: 1rem;
   max-width: 1200px;
   margin: 0 auto;
@@ -213,27 +214,27 @@ header .header-content {
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* Estado flutuante (após scroll) - pill com sombra */
 header.scrolled {
   padding: 0.8rem 0;
+  background: rgba(250, 249, 246, 0.95);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
 }
 
 header.scrolled .header-content {
   max-width: 900px;
   width: fit-content;
   margin: 0 auto;
-  background: rgba(250, 249, 246, 0.95);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   border-radius: 50px;
-  padding: 0.8rem 2rem;
-  box-shadow:
-    0 4px 30px rgba(0, 0, 0, 0.12),
-    0 1px 3px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 0;
+  box-shadow: none;
+  border: none;
 }
 
-/* Logo */
 header .logo,
 header a.logo {
   font-size: 1.8rem;
@@ -269,12 +270,8 @@ body.dark-mode header a.logo:hover {
   color: #FF5841 !important;
 }
 
-body.dark-mode header.scrolled .header-content {
+body.dark-mode header.scrolled {
   background: rgba(26, 26, 26, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow:
-    0 4px 30px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 /* ========================================
@@ -455,14 +452,11 @@ HERO
   align-items: center;
 }
 
-/* Hero Card - COLORIDO (mantido do print) */
 .hero-card {
   background: white;
   border-radius: 20px;
   padding: 2rem;
-  box-shadow:
-    0 25px 60px rgba(0, 0, 0, 0.12),
-    0 0 0 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.05);
   transform: rotate(3deg);
   transition: transform 0.4s ease;
   max-width: 380px;
@@ -534,52 +528,9 @@ HERO
   font-weight: 500;
 }
 
-/* --- DIVISORES ENTRE SEÇÕES (CORRIGIDO) --- */
-.section-divider {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  overflow: hidden;
-  line-height: 0;
-  /* REMOVIDO: transform: rotate(180deg) que invertia as curvas */
-}
-
-.section-divider svg {
-  position: relative;
-  display: block;
-  width: calc(100% + 1.3px);
-  height: 80px;
-}
-
-/* Para divisores no topo da seção (flip vertical) */
-.section-divider-top {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  overflow: hidden;
-  line-height: 0;
-  transform: rotate(180deg);
-}
-
-.section-divider-top svg {
-  position: relative;
-  display: block;
-  width: calc(100% + 1.3px);
-  height: 80px;
-}
-
-/* Dark mode dos divisores */
-body.dark-mode .section-divider svg path {
-  fill: #242424;
-}
-
-body.dark-mode .section-divider-top svg path {
-  fill: #1A1A1A;
-}
-
-/* Navegação Desktop */
+/* ========================================
+NAVEGAÇÃO DESKTOP
+======================================== */
 .desktop-nav {
   display: none;
 }
@@ -605,12 +556,12 @@ body.dark-mode .section-divider-top svg path {
   flex-shrink: 0;
 }
 
-/* Theme Toggle - GLASSMORFISMO (sem borda pesada) */
+/* Theme Toggle */
 .theme-toggle {
   background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: none; /* CORREÇÃO: removida borda pesada */
+  border: none;
   border-radius: 50px;
   width: 44px;
   height: 28px;
@@ -620,7 +571,7 @@ body.dark-mode .section-divider-top svg path {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Sombra suave */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   color: #1A1A1A;
 }
 
@@ -952,7 +903,7 @@ header.scrolled .whatsapp-header {
 }
 
 .comparison-list li::before {
-  content: '';
+  content: '✗';
   color: #C53678;
   font-weight: 800;
   font-size: 1.1rem;
@@ -1871,8 +1822,12 @@ body.dark-mode .portfolio-image {
   background: #1A1A1A;
 }
 
-body.dark-mode .section-divider svg path {
-  fill: #242424;
+body.dark-mode .desktop-nav a {
+  color: #FAFAF8;
+}
+
+body.dark-mode .desktop-nav a:hover {
+  color: #FF5841;
 }
 
 /* --- RESPONSIVIDADE --- */
