@@ -1741,39 +1741,6 @@ body.dark-mode .logo {
   color: #FAFAF8 !important;
 }
 
-/* ✅ CORREÇÃO: Links da navegação desktop no dark mode */
-body.dark-mode .desktop-nav a {
-  color: #FAFAF8;
-}
-
-body.dark-mode .desktop-nav a:hover {
-  color: #FF5841;
-}
-
-/* ✅ CORREÇÃO: Theme toggle no dark mode (borda clara) */
-body.dark-mode .theme-toggle {
-  border-color: #FAFAF8;
-}
-
-/* ✅ CORREÇÃO: Menu hambúrguer no dark mode */
-body.dark-mode .mobile-menu-toggle span {
-  background: #FAFAF8;
-}
-
-/* ✅ CORREÇÃO: Mobile nav no dark mode */
-body.dark-mode .mobile-nav {
-  background: #2D2D2D;
-}
-
-body.dark-mode .mobile-nav a {
-  color: #FAFAF8;
-  border-color: #3D3D3D;
-}
-
-body.dark-mode .mobile-nav a:hover {
-  color: #FF5841;
-}
-
 body.dark-mode .bg-white {
   background-color: #242424;
 }
@@ -1836,10 +1803,6 @@ body.dark-mode .btn-outline:hover {
   color: #1A1A1A;
 }
 
-body.dark-mode .section-divider svg path {
-  fill: #242424;
-}
-
 body.dark-mode .comparison-card {
   background: #2D2D2D;
   border-color: #FAFAF8;
@@ -1874,6 +1837,19 @@ body.dark-mode .share-card p {
   color: #B8B8B8;
 }
 
+body.dark-mode .mobile-nav {
+  background: #2D2D2D;
+}
+
+body.dark-mode .mobile-nav a {
+  color: #FAFAF8;
+  border-color: #3D3D3D;
+}
+
+body.dark-mode .mobile-menu-toggle span {
+  background: #FAFAF8;
+}
+
 body.dark-mode .portfolio-carousel::before {
   background: linear-gradient(90deg, #1A1A1A 0%, transparent 100%);
 }
@@ -1895,34 +1871,8 @@ body.dark-mode .portfolio-image {
   background: #1A1A1A;
 }
 
-body.dark-mode .founder-card {
-  background: #2D2D2D;
-}
-
-body.dark-mode .founder-info h3 {
-  color: #FAFAF8;
-}
-
-body.dark-mode .founder-info p,
-body.dark-mode .founder-bio {
-  color: #B8B8B8;
-}
-
-body.dark-mode .founder-bio strong {
-  color: #FAFAF8;
-}
-
-body.dark-mode .founder-highlights {
-  background: #1A1A1A;
-}
-
-body.dark-mode .highlight-label {
-  color: #B8B8B8;
-}
-
-body.dark-mode .credential-tag {
-  background: #1A1A1A;
-  color: #FAFAF8;
+body.dark-mode .section-divider svg path {
+  fill: #242424;
 }
 
 /* --- RESPONSIVIDADE --- */
