@@ -528,15 +528,62 @@ HERO
   gap: 0.8rem;
   flex-shrink: 0;
 }
+/* Theme Toggle — Glassmorfismo (sem borda pesada) */
 .theme-toggle {
-  background: transparent;
-  border: 2px solid #1A1A1A;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: none;
   border-radius: 50px;
-  width: 48px;
-  height: 30px;
+  width: 44px;
+  height: 28px;
   position: relative;
   cursor: pointer;
   transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  color: #1A1A1A;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+.theme-toggle .icon-sun,
+.theme-toggle .icon-moon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+}
+
+.theme-toggle .icon-sun {
+  opacity: 1;
+}
+
+.theme-toggle .icon-moon {
+  opacity: 0;
+}
+
+body.dark-mode .theme-toggle {
+  background: rgba(45, 45, 45, 0.4);
+  color: #FAFAF8;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .theme-toggle:hover {
+  background: rgba(45, 45, 45, 0.6);
+}
+
+body.dark-mode .theme-toggle .icon-sun {
+  opacity: 0;
+}
+
+body.dark-mode .theme-toggle .icon-moon {
+  opacity: 1;
 }
 .theme-toggle::before {
   content: '️';
