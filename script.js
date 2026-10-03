@@ -132,25 +132,40 @@ document.addEventListener('DOMContentLoaded', () => {
     link.href = `https://wa.me/${whatsappNumber}?text=${message}`;
   });
 
-  // --- 8. Share Buttons ---
-  const currentUrl = window.location.href;
-  const shareText = encodeURIComponent("Conheci o Estúdio Basalces e achei incrível! Sites profissionais com suporte incluso. Dá uma olhada:");
-  document.querySelectorAll('[data-share]').forEach(btn => {
-    btn.addEventListener('click', function(e) {
-      e.preventDefault();
-      const platform = this.getAttribute('data-share');
-      let shareUrl = '';
-      switch(platform) {
-        case 'whatsapp':
-          shareUrl = `https://wa.me/?text=${shareText}%20${encodeURIComponent(currentUrl)}`;
-          break;
-        case 'linkedin':
-          shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`;
-          break;
-      }
-      if (shareUrl) {
-        window.open(shareUrl, '_blank', 'width=600,height=400,scrollbars=yes');
-      }
-    });
+// --- 8. Share Buttons (Corrigido para <button> e com mais redes) ---
+const currentUrl = window.location.href;
+const pageTitle = document.title;
+const shareText = encodeURIComponent(`Acabei de conhecer o Estúdio Basalces — sites profissionais com design autoral e suporte humano. Recomendo!`);
+const shareUrlText = encodeURIComponent(currentUrl);
+
+document.querySelectorAll('[data-share]').forEach(btn => {
+  btn.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const platform = this.getAttribute('data-share');
+    let shareUrl = '';
+
+    switch(platform) {
+      case 'whatsapp':
+        shareUrl = `https://wa.me/?text=${shareText}%20${shareUrlText}`;
+        break;
+      case 'linkedin':
+        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${shareUrlText}`;
+        break;
+      case 'twitter':
+        shareUrl = `https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrlText}`;
+        break;
+      case 'facebook':
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${shareUrlText}`;
+        break;
+      case 'telegram':
+        shareUrl = `https://t.me/share/url?url=${shareUrlText}&text=${shareText}`;
+        break;
+    }
+
+    if (shareUrl) {
+      window.open(shareUrl, '_blank', 'width=600,height=400,scrollbars=yes,resizable=yes');
+    }
   });
+});
 });
