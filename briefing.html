@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefing | Estúdio Basalces</title>
+    <meta name="description" content="Formulário de briefing para criação do seu site profissional pelo Estúdio Basalces.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <style>
+        /* ========================================
+           BRIEFING - ESTÚDIO BASALCES
+           Paleta: Off-White, Laranja, Vermelho-Violeta
+        ======================================== */
+
+        /* --- RESET E BASE --- */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            background-color: #FAFAF8;
+            color: #1A1A1A;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        *:focus-visible {
+            outline: 3px solid #FF5841;
+            outline-offset: 2px;
+        }
+
+        /* --- BACKGROUND DECORATIVO --- */
+        .bg-decoration {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-decoration::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 88, 65, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .bg-decoration::after {
+            content: '';
+            position: absolute;
+            bottom: -15%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(197, 54, 120, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .bg-grid {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image:
+                linear-gradient(rgba(26, 26, 26, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(26, 26, 26, 0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+        }
+
+        /* --- LAYOUT PRINCIPAL --- */
+        .briefing-page {
+            position: relative;
+            z-index: 1;
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+            min-height: 100vh;
+        }
+
+        /* --- HEADER DO BRIEFING --- */
+        .briefing-header {
+            text-align: center;
+            padding: 3rem 0 2rem;
+        }
+
+        .briefing-logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #1A1A1A;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 2rem;
+            transition: color 0.3s;
+        }
+
+        .briefing-logo:hover {
+            color: #FF5841;
+        }
+
+        .briefing-logo span {
+            color: #FF5841;
+        }
+
+        .briefing-header h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .briefing-header p {
+            font-size: 1.1rem;
+            color: #5A5A5A;
+            max-width: 550px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* --- BARRA DE PROGRESSO --- */
+        .progress-container {
+            margin: 2.5rem 0 3rem;
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            margin-bottom: 0.8rem;
+        }
+
+        .progress-line-bg {
+            position: absolute;
+            top: 50%;
+            left: 24px;
+            right: 24px;
+            height: 3px;
+            background: #E8E6E1;
+            transform: translateY(-50%);
+            border-radius: 3px;
+            z-index: 0;
+        }
+
+        .progress-line-fill {
+            position: absolute;
+            top: 50%;
+            left: 24px;
+            height: 3px;
+            background: linear-gradient(90deg, #FF5841, #C53678);
+            transform: translateY(-50%);
+            border-radius: 3px;
+            z-index: 1;
+            transition: width 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            width: 0%;
+        }
+
+        .progress-step {
+            position: relative;
+            z-index: 2;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #E8E6E1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #B8B8B8;
+            transition: all 0.4s ease;
+            cursor: default;
+        }
+
+        .progress-step.active {
+            border-color: #FF5841;
+            color: #FF5841;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(255, 88, 65, 0.15);
+            transform: scale(1.1);
+        }
+
+        .progress-step.completed {
+            border-color: #FF5841;
+            background: #FF5841;
+            color: white;
+        }
+
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .progress-label {
+            font-size: 0.7rem;
+            color: #B8B8B8;
+            text-align: center;
+            width: 48px;
+            font-weight: 600;
+            transition: color 0.3s;
+            line-height: 1.2;
+        }
+
+        .progress-label.active {
+            color: #FF5841;
+        }
+
+        .progress-label.completed {
+            color: #1A1A1A;
+        }
+
+        /* --- CARD DO FORMULÁRIO --- */
+        .form-card {
+            background: white;
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.08),
+                0 0 0 1px rgba(0, 0, 0, 0.04);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #FF5841, #C53678);
+        }
+
+        /* --- STEPS --- */
+        .form-step {
+            display: none;
+            animation: fadeSlideIn 0.4s ease;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        @keyframes fadeSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .step-header {
+            margin-bottom: 2rem;
+        }
+
+        .step-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #FF5841, #C53678);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .step-header h2 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+            color: #1A1A1A;
+        }
+
+        .step-header p {
+            font-size: 0.95rem;
+            color: #5A5A5A;
+            line-height: 1.6;
+        }
+
+        /* --- CAMPOS DO FORMULÁRIO --- */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #1A1A1A;
+            margin-bottom: 0.5rem;
+        }
+
+        label .required {
+            color: #FF5841;
+            margin-left: 2px;
+        }
+
+        label .optional {
+            color: #B8B8B8;
+            font-weight: 400;
+            font-size: 0.8rem;
+            margin-left: 4px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="url"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: 2px solid #E8E6E1;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            color: #1A1A1A;
+            background: #FAFAF8;
+            transition: all 0.3s ease;
+            -webkit-appearance: none;
+        }
+
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #FF5841;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(255, 88, 65, 0.1);
+            outline: none;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #B8B8B8;
+        }
+
+        input.error,
+        textarea.error,
+        select.error {
+            border-color: #C53678;
+            box-shadow: 0 0 0 4px rgba(197, 54, 120, 0.1);
+        }
+
+        .error-message {
+            color: #C53678;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.4rem;
+            display: none;
+        }
+
+        .error-message.visible {
+            display: block;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        select {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235A5A5A' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+
+        .field-hint {
+            font-size: 0.8rem;
+            color: #B8B8B8;
+            margin-top: 0.4rem;
+            line-height: 1.4;
+        }
+
+        /* --- CHECKBOXES E RADIOS CUSTOMIZADOS --- */
+        .checkbox-group,
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+        }
+
+        .check-item,
+        .radio-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+            padding: 0.8rem 1rem;
+            border: 2px solid #E8E6E1;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #FAFAF8;
+        }
+
+        .check-item:hover,
+        .radio-item:hover {
+            border-color: #FF5841;
+            background: white;
+        }
+
+        .check-item.selected,
+        .radio-item.selected {
+            border-color: #FF5841;
+            background: rgba(255, 88, 65, 0.04);
+        }
+
+        .check-item input,
+        .radio-item input {
+            width: 20px;
+            height: 20px;
+            accent-color: #FF5841;
+            margin-top: 2px;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        .check-item label,
+        .radio-item label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #1A1A1A;
+            cursor: pointer;
+            margin-bottom: 0;
+        }
+
+        /* --- BOTÕES DE NAVEGAÇÃO --- */
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 2px solid #F5F3EF;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            font-family: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: #FF5841;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #E64A35;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 88, 65, 0.35);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #5A5A5A;
+            border: 2px solid #E8E6E1;
+        }
+
+        .btn-secondary:hover {
+            border-color: #1A1A1A;
+            color: #1A1A1A;
+        }
+
+        .btn-send {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            padding: 1.2rem 2.5rem;
+            font-size: 1.05rem;
+        }
+
+        .btn-send:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        /* --- RESUMO FINAL (STEP 6) --- */
+        .summary-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .summary-section h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #FF5841;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .summary-section h3::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #E8E6E1;
+        }
+
+        .summary-grid {
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .summary-item {
+            display: flex;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            padding: 0.5rem 0;
+        }
+
+        .summary-item .s-label {
+            font-weight: 600;
+            color: #5A5A5A;
+            min-width: 140px;
+            flex-shrink: 0;
+        }
+
+        .summary-item .s-value {
+            color: #1A1A1A;
+            font-weight: 500;
+        }
+
+        .summary-empty {
+            color: #B8B8B8;
+            font-style: italic;
+        }
+
+        .summary-notice {
+            background: rgba(255, 88, 65, 0.06);
+            border: 1px solid rgba(255, 88, 65, 0.15);
+            border-radius: 12px;
+            padding: 1.2rem 1.5rem;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: #5A5A5A;
+            line-height: 1.6;
+        }
+
+        .summary-notice strong {
+            color: #1A1A1A;
+        }
+
+        /* --- TELA DE SUCESSO --- */
+        .success-screen {
+            display: none;
+            text-align: center;
+            padding: 3rem 1rem;
+            animation: fadeSlideIn 0.5s ease;
+        }
+
+        .success-screen.active {
+            display: block;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 1.5rem;
+            animation: successPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes successPop {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+
+        .success-screen h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #1A1A1A;
+        }
+
+        .success-screen p {
+            font-size: 1.05rem;
+            color: #5A5A5A;
+            max-width: 450px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+        }
+
+        /* --- FOOTER --- */
+        .briefing-footer {
+            text-align: center;
+            padding: 3rem 0 1rem;
+            font-size: 0.85rem;
+            color: #B8B8B8;
+        }
+
+        .briefing-footer a {
+            color: #FF5841;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .briefing-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* --- DARK MODE --- */
+        body.dark-mode {
+            background-color: #1A1A1A;
+            color: #FAFAF8;
+        }
+
+        body.dark-mode .briefing-logo {
+            color: #FAFAF8;
+        }
+
+        body.dark-mode .step-header h2,
+        body.dark-mode label,
+        body.dark-mode .summary-item .s-value,
+        body.dark-mode .success-screen h2 {
+            color: #FAFAF8;
+        }
+
+        body.dark-mode .briefing-header p,
+        body.dark-mode .step-header p,
+        body.dark-mode .summary-item .s-label,
+        body.dark-mode .success-screen p,
+        body.dark-mode .summary-notice {
+            color: #B8B8B8;
+        }
+
+        body.dark-mode .summary-notice strong {
+            color: #FAFAF8;
+        }
+
+        body.dark-mode .form-card {
+            background: #242424;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05);
+        }
+
+        body.dark-mode input,
+        body.dark-mode textarea,
+        body.dark-mode select {
+            background: #1A1A1A;
+            border-color: #3D3D3D;
+            color: #FAFAF8;
+        }
+
+        body.dark-mode input:focus,
+        body.dark-mode textarea:focus,
+        body.dark-mode select:focus {
+            border-color: #FF5841;
+            background: #242424;
+        }
+
+        body.dark-mode input::placeholder,
+        body.dark-mode textarea::placeholder {
+            color: #5A5A5A;
+        }
+
+        body.dark-mode .check-item,
+        body.dark-mode .radio-item {
+            background: #1A1A1A;
+            border-color: #3D3D3D;
+        }
+
+        body.dark-mode .check-item:hover,
+        body.dark-mode .radio-item:hover {
+            border-color: #FF5841;
+            background: #242424;
+        }
+
+        body.dark-mode .check-item.selected,
+        body.dark-mode .radio-item.selected {
+            border-color: #FF5841;
+            background: rgba(255, 88, 65, 0.1);
+        }
+
+        body.dark-mode .check-item label,
+        body.dark-mode .radio-item label {
+            color: #FAFAF8;
+        }
+
+        body.dark-mode .progress-step {
+            background: #242424;
+            border-color: #3D3D3D;
+            color: #5A5A5A;
+        }
+
+        body.dark-mode .progress-step.active {
+            background: #242424;
+            border-color: #FF5841;
+            color: #FF5841;
+        }
+
+        body.dark-mode .progress-line-bg {
+            background: #3D3D3D;
+        }
+
+        body.dark-mode .progress-label {
+            color: #5A5A5A;
+        }
+
+        body.dark-mode .progress-label.completed {
+            color: #FAFAF8;
+        }
+
+        body.dark-mode .form-navigation {
+            border-color: #3D3D3D;
+        }
+
+        body.dark-mode .btn-secondary {
+            color: #B8B8B8;
+            border-color: #3D3D3D;
+        }
+
+        body.dark-mode .btn-secondary:hover {
+            border-color: #FAFAF8;
+            color: #FAFAF8;
+        }
+
+        body.dark-mode .summary-section h3::after {
+            background: #3D3D3D;
+        }
+
+        body.dark-mode .bg-grid {
+            background-image:
+                linear-gradient(rgba(250, 248, 246, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(250, 248, 246, 0.02) 1px, transparent 1px);
+        }
+
+        /* --- THEME TOGGLE --- */
+        .theme-toggle-briefing {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 100;
+            background: white;
+            border: 2px solid #E8E6E1;
+            border-radius: 50px;
+            width: 48px;
+            height: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .theme-toggle-briefing::before {
+            content: '☀️';
+            position: absolute;
+            left: 4px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .theme-toggle-briefing {
+            background: #2D2D2D;
+            border-color: #3D3D3D;
+        }
+
+        body.dark-mode .theme-toggle-briefing::before {
+            content: '🌙';
+            left: 24px;
+        }
+
+        /* --- RESPONSIVIDADE --- */
+        @media (max-width: 768px) {
+            .briefing-page {
+                padding: 1.5rem 1rem 3rem;
+            }
+
+            .form-card {
+                padding: 2rem 1.5rem;
+                border-radius: 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .checkbox-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .progress-step {
+                width: 40px;
+                height: 40px;
+                font-size: 0.8rem;
+            }
+
+            .progress-label {
+                font-size: 0.6rem;
+                width: 40px;
+            }
+
+            .progress-line-bg,
+            .progress-line-fill {
+                left: 20px;
+                right: 20px;
+            }
+
+            .form-navigation {
+                flex-direction: column-reverse;
+                gap: 1rem;
+            }
+
+            .form-navigation .btn {
+                width: 100%;
+            }
+
+            .summary-item {
+                flex-direction: column;
+                gap: 0.2rem;
+            }
+
+            .summary-item .s-label {
+                min-width: auto;
+            }
+
+            .briefing-header h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-card {
+                padding: 1.5rem 1.2rem;
+            }
+
+            .step-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 1.3rem;
+            }
+
+            .step-header h2 {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* --- REDUÇÃO DE MOVIMENTO --- */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Decoração de fundo -->
+    <div class="bg-decoration"></div>
+    <div class="bg-grid"></div>
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle-briefing" id="themeToggle" aria-label="Alternar modo escuro"></button>
+
+    <main class="briefing-page">
+        <!-- Header -->
+        <header class="briefing-header">
+            <a href="index.html" class="briefing-logo">Estúdio <span>Basalces</span></a>
+            <h1>Briefing do seu <span style="color: #FF5841;">novo site</span></h1>
+            <p>Responda as perguntas abaixo para que eu possa entender seu negócio e criar o site perfeito para você. Leva menos de 5 minutos.</p>
+        </header>
+
+        <!-- Barra de Progresso -->
+        <div class="progress-container" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="6">
+            <div class="progress-steps">
+                <div class="progress-line-bg"></div>
+                <div class="progress-line-fill" id="progressFill"></div>
+                <div class="progress-step active" data-step="1">1</div>
+                <div class="progress-step" data-step="2">2</div>
+                <div class="progress-step" data-step="3">3</div>
+                <div class="progress-step" data-step="4">4</div>
+                <div class="progress-step" data-step="5">5</div>
+                <div class="progress-step" data-step="6">6</div>
+            </div>
+            <div class="progress-labels">
+                <span class="progress-label active">Dados</span>
+                <span class="progress-label">Negócio</span>
+                <span class="progress-label">Objetivos</span>
+                <span class="progress-label">Visual</span>
+                <span class="progress-label">Conteúdo</span>
+                <span class="progress-label">Revisão</span>
+            </div>
+        </div>
+
+        <!-- Formulário -->
+        <div class="form-card">
+            <form id="briefingForm" novalidate>
+
+                <!-- STEP 1: Dados Pessoais -->
+                <div class="form-step active" data-step="1">
+                    <div class="step-header">
+                        <div class="step-icon">👤</div>
+                        <h2>Seus Dados</h2>
+                        <p>Informações básicas para eu entrar em contato e personalizar o projeto.</p>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nome">Nome completo <span class="required">*</span></label>
+                            <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
+                            <div class="error-message" id="nomeError">Por favor, informe seu nome.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="empresa">Nome da empresa / marca <span class="required">*</span></label>
+                            <input type="text" id="empresa" name="empresa" placeholder="Ex: Clínica Renascer" required>
+                            <div class="error-message" id="empresaError">Por favor, informe o nome da empresa.</div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">E-mail <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                            <div class="error-message" id="emailError">Informe um e-mail válido.</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="whatsapp">WhatsApp <span class="required">*</span></label>
+                            <input type="tel" id="whatsapp" name="whatsapp" placeholder="(31) 99999-9999" required>
+                            <div class="error-message" id="whatsappError">Informe seu WhatsApp.</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cidade">Cidade / Estado <span class="optional">(opcional)</span></label>
+                        <input type="text" id="cidade" name="cidade" placeholder="Ex: Belo Horizonte / MG">
+                    </div>
+
+                    <div class="form-navigation">
+                        <div></div>
+                        <button type="button" class="btn btn-primary next-btn">Próximo →</button>
+                    </div>
+                </div>
+
+                <!-- STEP 2: Sobre o Negócio -->
+                <div class="form-step" data-step="2">
+                    <div class="step-header">
+                        <div class="step-icon">💼</div>
+                        <h2>Seu Negócio</h2>
+                        <p>Me conte sobre o que você faz para que eu possa criar um site que realmente represente seu trabalho.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nicho">Qual é o seu nicho de atuação? <span class="required">*</span></label>
+                        <select id="nicho" name="nicho" required>
+                            <option value="" disabled selected>Selecione uma opção</option>
+                            <option value="Advocacia">Advocacia</option>
+                            <option value="Saúde / Clínica">Saúde / Clínica</option>
+                            <option value="Psicologia">Psicologia</option>
+                            <option value="Consultoria">Consultoria</option>
+                            <option value="Coaching / Mentoria">Coaching / Mentoria</option>
+                            <option value="Design / Criativo">Design / Criativo</option>
+                            <option value="Fotografia / Vídeo">Fotografia / Vídeo</option>
+                            <option value="Restaurante / Alimentação">Restaurante / Alimentação</option>
+                            <option value="Salão / Estética">Salão / Estética</option>
+                            <option value="Educação / Cursos">Educação / Cursos</option>
+                            <option value="Tecnologia / TI">Tecnologia / TI</option>
+                            <option value="Imobiliário">Imobiliário</option>
+                            <option value="Construção / Arquitetura">Construção / Arquitetura</option>
+                            <option value="Contabilidade / Financeiro">Contabilidade / Financeiro</option>
+                            <option value="Outro">Outro</option>
+                        </select>
+                        <div class="error-message" id="nichoError">Selecione seu nicho de atuação.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="descricao">Descreva seu negócio em poucas palavras <span class="required">*</span></label>
+                        <textarea id="descricao" name="descricao" placeholder="Ex: Sou advogada trabalhista há 10 anos, atendo empresas de médio porte em BH. Meu diferencial é o atendimento humanizado e respostas rápidas." required></textarea>
+                        <div class="error-message" id="descricaoError">Conte um pouco sobre seu negócio.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="diferencial">O que diferencia você da concorrência? <span class="optional">(opcional)</span></label>
+                        <textarea id="diferencial" name="diferencial" placeholder="Ex: Atendimento personalizado, 15 anos de experiência, metodologia própria, preço justo..." style="min-height: 90px;"></textarea>
+                    </div>
+
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-secondary prev-btn">← Voltar</button>
+                        <button type="button" class="btn btn-primary next-btn">Próximo →</button>
+                    </div>
+                </div>
+
+                <!-- STEP 3: Objetivos do Site -->
+                <div class="form-step" data-step="3">
+                    <div class="step-header">
+                        <div class="step-icon">🎯</div>
+                        <h2>Objetivos do Site</h2>
+                        <p>Entender o que você espera do site me ajuda a criar algo que realmente gere resultados.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Qual o principal objetivo do seu site? <span class="required">*</span></label>
+                        <div class="radio-group" id="objetivoGroup">
+                            <label class="radio-item">
+                                <input type="radio" name="objetivo" value="Atrair novos clientes">
+                                <span>Atrair novos clientes</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="objetivo" value="Transmitir credibilidade">
+                                <span>Transmitir credibilidade e profissionalismo</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="objetivo" value="Aparecer no Google">
+                                <span>Aparecer no Google (SEO)</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="objetivo" value="Portfólio">
+                                <span>Mostrar meu portfólio / trabalhos</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="objetivo" value="Informar clientes">
+                                <span>Informar clientes (horários, serviços, localização)</span>
+                            </label>
+                        </div>
+                        <div class="error-message" id="objetivoError">Selecione o principal objetivo.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="publico">Quem é o seu público-alvo? <span class="required">*</span></label>
+                        <textarea id="publico" name="publico" placeholder="Ex: Mulheres de 25-45 anos, classe B, que buscam terapia online. / Empresas de médio porte que precisam de assessoria jurídica trabalhista." required style="min-height: 90px;"></textarea>
+                        <div class="error-message" id="publicoError">Descreva seu público-alvo.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Qual ação principal você quer que o visitante faça? <span class="required">*</span></label>
+                        <div class="radio-group" id="ctaGroup">
+                            <label class="radio-item">
+                                <input type="radio" name="cta" value="Chamar no WhatsApp">
+                                <span>Chamar no WhatsApp</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="cta" value="Preencher formulário">
+                                <span>Preencher um formulário de contato</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="cta" value="Ligar">
+                                <span>Ligar para um telefone</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="cta" value="Agendar online">
+                                <span>Agendar horário online</span>
+                            </label>
+                        </div>
+                        <div class="error-message" id="ctaError">Selecione a ação principal desejada.</div>
+                    </div>
+
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-secondary prev-btn">← Voltar</button>
+                        <button type="button" class="btn btn-primary next-btn">Próximo →</button>
+                    </div>
+                </div>
+
+                <!-- STEP 4: Identidade Visual -->
+                <div class="form-step" data-step="4">
+                    <div class="step-header">
+                        <div class="step-icon">🎨</div>
+                        <h2>Identidade Visual</h2>
+                        <p>Referências visuais me ajudam a entender seu gosto e criar algo que combine com sua marca.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Você já tem logotipo? <span class="required">*</span></label>
+                        <div class="radio-group" id="logoGroup">
+                            <label class="radio-item">
+                                <input type="radio" name="logo" value="Sim, tenho em alta resolução">
+                                <span>Sim, tenho em alta resolução</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="logo" value="Tenho, mas em baixa qualidade">
+                                <span>Tenho, mas em baixa qualidade</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="logo" value="Não tenho logotipo">
+                                <span>Não tenho logotipo</span>
+                            </label>
+                        </div>
+                        <div class="error-message" id="logoError">Informe sobre seu logotipo.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cores">Tem cores preferidas para o site? <span class="optional">(opcional)</span></label>
+                        <input type="text" id="cores" name="cores" placeholder="Ex: Azul marinho e dourado / Tons terrosos / Não tenho preferência">
+                        <div class="field-hint">Se não tiver preferência, criaremos uma paleta profissional alinhada ao seu nicho.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="referencias">Sites que você admira <span class="optional">(opcional)</span></label>
+                        <textarea id="referencias" name="referencias" placeholder="Cole links de sites que você acha bonitos e diga o que gosta neles. Ex: apple.com (pela limpeza), nubank.com.br (pela simplicidade)..." style="min-height: 100px;"></textarea>
+                        <div class="field-hint">Não precisa ser do seu nicho. Pode ser qualquer site que você ache visualmente atraente.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Que estilo visual mais combina com você? <span class="optional">(opcional)</span></label>
+                        <div class="checkbox-grid" id="estiloGroup">
+                            <label class="check-item">
+                                <input type="checkbox" name="estilo" value="Minimalista e limpo">
+                                <span>Minimalista e limpo</span>
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox" name="estilo" value="Moderno e ousado">
+                                <span>Moderno e ousado</span>
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox" name="estilo" value="Clássico e elegante">
+                                <span>Clássico e elegante</span>
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox" name="estilo" value="Descontraído e criativo">
+                                <span>Descontraído e criativo</span>
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox" name="estilo" value="Corporativo e sério">
+                                <span>Corporativo e sério</span>
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox" name="estilo" value="Não sei, confio em você">
+                                <span>Não sei, confio em você 🙌</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-secondary prev-btn">← Voltar</button>
+                        <button type="button" class="btn btn-primary next-btn">Próximo →</button>
+                    </div>
+                </div>
+
+                <!-- STEP 5: Conteúdo e Estrutura -->
+                <div class="form-step" data-step="5">
+                    <div class="step-header">
+                        <div class="step-icon">📝</div>
+                        <h2>Conteúdo e Estrutura</h2>
+                        <p>Informações sobre o conteúdo que você já tem e a estrutura que imagina para o site.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Quais seções você imagina para o site? <span class="required">*</span></label>
+                        <div class="checkbox-grid" id="secoesGroup">
+                            <label class="check-item">
+                                <input type="checkbox" name="secoes" value="Início / Hero">
+                                <span>Início / Apresentação</span>
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox" name="secoes" value="Sobre mim/nós">
+                                <span>Sobre mim / nós</span>
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox" name="secoes" value="Serviços">
+                                <span>Serviços</span>
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox" name="secoes" value="Portfólio / Trabalhos">
+                                <span>Portfólio / Trabalhos</span>
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox" name="secoes" value="Depoimentos">
+                                <span>Depoimentos de clientes</span>
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox" name="secoes" value="Blog / Artigos">
+                                <span>Blog / Artigos</span>
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox" name="secoes" value="FAQ / Dúvidas">
+                                <span>FAQ / Dúvidas frequentes</span>
+                            </label>
+                            <label class="check-item">
+                                <input type="checkbox" name="secoes" value="Contato / Localização">
+                                <span>Contato / Localização</span>
+                            </label>
+                        </div>
+                        <div class="error-message" id="secoesError">Selecione pelo menos uma seção.</div>
+                        <div class="field-hint">O pacote inclui até 5 seções. Se precisar de mais, conversamos sobre um orçamento adicional.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Você já tem os textos prontos? <span class="required">*</span></label>
+                        <div class="radio-group" id="textosGroup">
+                            <label class="radio-item">
+                                <input type="radio" name="textos" value="Sim, tenho tudo pronto">
+                                <span>Sim, tenho tudo pronto</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="textos" value="Tenho parcialmente">
+                                <span>Tenho parcialmente, preciso de ajuda</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="textos" value="Não tenho, preciso que escrevam">
+                                <span>Não tenho, preciso que escrevam para mim</span>
+                            </label>
+                        </div>
+                        <div class="error-message" id="textosError">Informe sobre seus textos.</div>
+                        <div class="field-hint">Textos básicos estão inclusos no pacote. Textos avançados/persuasivos podem ser orçados à parte.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Você tem fotos profissionais? <span class="required">*</span></label>
+                        <div class="radio-group" id="fotosGroup">
+                            <label class="radio-item">
+                                <input type="radio" name="fotos" value="Sim, tenho fotos profissionais">
+                                <span>Sim, tenho fotos profissionais</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="fotos" value="Tenho fotos casuais (celular)">
+                                <span>Tenho fotos casuais (celular)</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="fotos" value="Não tenho, usar banco de imagens">
+                                <span>Não tenho, podemos usar banco de imagens</span>
+                            </label>
+                        </div>
+                        <div class="error-message" id="fotosError">Informe sobre suas fotos.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dominio">Já tem domínio registrado? <span class="optional">(opcional)</span></label>
+                        <input type="text" id="dominio" name="dominio" placeholder="Ex: www.minhaempresa.com.br ou 'Não tenho'">
+                        <div class="field-hint">Se não tiver, te ajudamos a registrar. O custo é de aprox. R$ 40/ano pago diretamente ao Registro.br.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="redes">Suas redes sociais <span class="optional">(opcional)</span></label>
+                        <textarea id="redes" name="redes" placeholder="Instagram: @minhaempresa&#10;LinkedIn: linkedin.com/in/meuperfil&#10;Facebook: facebook.com/minhaempresa" style="min-height: 90px;"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="observacoes">Alguma observação adicional? <span class="optional">(opcional)</span></label>
+                        <textarea id="observacoes" name="observacoes" placeholder="Prazo especial, funcionalidade específica, algo que eu deva saber..." style="min-height: 90px;"></textarea>
+                    </div>
+
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-secondary prev-btn">← Voltar</button>
+                        <button type="button" class="btn btn-primary next-btn">Revisar respostas →</button>
+                    </div>
+                </div>
+
+                <!-- STEP 6: Revisão e Envio -->
+                <div class="form-step" data-step="6">
+                    <div class="step-header">
+                        <div class="step-icon">✅</div>
+                        <h2>Revise suas respostas</h2>
+                        <p>Confira tudo antes de enviar. Se precisar alterar algo, é só voltar na etapa correspondente.</p>
+                    </div>
+
+                    <div id="summaryContent">
+                        <!-- Preenchido via JS -->
+                    </div>
+
+                    <div class="summary-notice">
+                        <strong>📌 O que acontece agora?</strong><br>
+                        Suas respostas serão enviadas para o WhatsApp do Estúdio Basalces. Em até 24 horas úteis, Paulin entrará em contato para alinhar os detalhes e iniciar o projeto. Sem compromisso!
+                    </div>
+
+                    <div class="form-navigation">
+                        <button type="button" class="btn btn-secondary prev-btn">← Voltar</button>
+                        <button type="button" class="btn btn-send" id="sendBtn">
+                            💬 Enviar pelo WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Tela de Sucesso -->
+            <div class="success-screen" id="successScreen">
+                <div class="success-icon">✓</div>
+                <h2>Briefing enviado! 🎉</h2>
+                <p>Suas respostas foram enviadas para o WhatsApp do Estúdio Basalces. Em breve, Paulin entrará em contato para dar início ao seu projeto.</p>
+                <a href="index.html" class="btn btn-primary">Voltar ao site</a>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="briefing-footer">
+            <p>© 2026 <a href="index.html">Estúdio Basalces</a>. Todos os direitos reservados.</p>
+        </footer>
+    </main>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- Theme Toggle ---
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+            });
+        }
+
+        // --- Variáveis ---
+        let currentStep = 1;
+        const totalSteps = 6;
+        const form = document.getElementById('briefingForm');
+        const steps = document.querySelectorAll('.form-step');
+        const progressSteps = document.querySelectorAll('.progress-step');
+        const progressLabels = document.querySelectorAll('.progress-label');
+        const progressFill = document.getElementById('progressFill');
+
+        // --- Checkbox/Radio visual toggle ---
+        document.querySelectorAll('.check-item input').forEach(input => {
+            input.addEventListener('change', () => {
+                input.closest('.check-item').classList.toggle('selected', input.checked);
+            });
+        });
+
+        document.querySelectorAll('.radio-item input').forEach(input => {
+            input.addEventListener('change', () => {
+                const group = input.closest('.radio-group');
+                group.querySelectorAll('.radio-item').forEach(item => item.classList.remove('selected'));
+                input.closest('.radio-item').classList.add('selected');
+            });
+        });
+
+        // --- Navegação ---
+        function goToStep(step) {
+            if (step < 1 || step > totalSteps) return;
+
+            // Se avançando, valida o step atual
+            if (step > currentStep) {
+                if (!validateStep(currentStep)) return;
+            }
+
+            currentStep = step;
+
+            // Atualiza steps visíveis
+            steps.forEach(s => s.classList.remove('active'));
+            document.querySelector(`.form-step[data-step="${currentStep}"]`).classList.add('active');
+
+            // Atualiza progresso
+            progressSteps.forEach((ps, i) => {
+                ps.classList.remove('active', 'completed');
+                progressLabels[i].classList.remove('active', 'completed');
+                if (i + 1 < currentStep) {
+                    ps.classList.add('completed');
+                    ps.innerHTML = '✓';
+                    progressLabels[i].classList.add('completed');
+                } else if (i + 1 === currentStep) {
+                    ps.classList.add('active');
+                    ps.innerHTML = i + 1;
+                    progressLabels[i].classList.add('active');
+                } else {
+                    ps.innerHTML = i + 1;
+                }
+            });
+
+            // Barra de preenchimento
+            const fillPercent = ((currentStep - 1) / (totalSteps - 1)) * 100;
+            progressFill.style.width = `calc(${fillPercent}% - ${fillPercent < 100 ? 0 : 0}px)`;
+
+            // Se é o step de revisão, gera o resumo
+            if (currentStep === 6) {
+                generateSummary();
+            }
+
+            // Scroll suave para o topo do card
+            document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Botões next/prev
+        document.querySelectorAll('.next-btn').forEach(btn => {
+            btn.addEventListener('click', () => goToStep(currentStep + 1));
+        });
+
+        document.querySelectorAll('.prev-btn').forEach(btn => {
+            btn.addEventListener('click', () => goToStep(currentStep - 1));
+        });
+
+        // --- Validação ---
+        function validateStep(step) {
+            let isValid = true;
+
+            // Limpa erros anteriores
+            document.querySelectorAll(`.form-step[data-step="${step}"] .error`).forEach(el => el.classList.remove('error'));
+            document.querySelectorAll(`.form-step[data-step="${step}"] .error-message`).forEach(el => el.classList.remove('visible'));
+
+            function showError(fieldId, errorId) {
+                const field = document.getElementById(fieldId);
+                const error = document.getElementById(errorId);
+                if (field) field.classList.add('error');
+                if (error) error.classList.add('visible');
+                isValid = false;
+            }
+
+            function showGroupError(errorId) {
+                const error = document.getElementById(errorId);
+                if (error) error.classList.add('visible');
+                isValid = false;
+            }
+
+            if (step === 1) {
+                if (!document.getElementById('nome').value.trim()) showError('nome', 'nomeError');
+                if (!document.getElementById('empresa').value.trim()) showError('empresa', 'empresaError');
+                const email = document.getElementById('email').value.trim();
+                if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) showError('email', 'emailError');
+                if (!document.getElementById('whatsapp').value.trim()) showError('whatsapp', 'whatsappError');
+            }
+
+            if (step === 2) {
+                if (!document.getElementById('nicho').value) showError('nicho', 'nichoError');
+                if (!document.getElementById('descricao').value.trim()) showError('descricao', 'descricaoError');
+            }
+
+            if (step === 3) {
+                if (!document.querySelector('input[name="objetivo"]:checked')) showGroupError('objetivoError');
+                if (!document.getElementById('publico').value.trim()) showError('publico', 'publicoError');
+                if (!document.querySelector('input[name="cta"]:checked')) showGroupError('ctaError');
+            }
+
+            if (step === 4) {
+                if (!document.querySelector('input[name="logo"]:checked')) showGroupError('logoError');
+            }
+
+            if (step === 5) {
+                if (!document.querySelector('input[name="secoes"]:checked')) showGroupError('secoesError');
+                if (!document.querySelector('input[name="textos"]:checked')) showGroupError('textosError');
+                if (!document.querySelector('input[name="fotos"]:checked')) showGroupError('fotosError');
+            }
+
+            return isValid;
+        }
+
+        // --- Gera Resumo ---
+        function generateSummary() {
+            const getValue = (id) => {
+                const el = document.getElementById(id);
+                return el ? el.value.trim() : '';
+            };
+
+            const getRadio = (name) => {
+                const checked = document.querySelector(`input[name="${name}"]:checked`);
+                return checked ? checked.value : '';
+            };
+
+            const getCheckboxes = (name) => {
+                const checked = document.querySelectorAll(`input[name="${name}"]:checked`);
+                return Array.from(checked).map(c => c.value).join(', ');
+            };
+
+            const sections = [
+                {
+                    title: '👤 Seus Dados',
+                    items: [
+                        { label: 'Nome', value: getValue('nome') },
+                        { label: 'Empresa', value: getValue('empresa') },
+                        { label: 'E-mail', value: getValue('email') },
+                        { label: 'WhatsApp', value: getValue('whatsapp') },
+                        { label: 'Cidade/UF', value: getValue('cidade') || '—' },
+                    ]
+                },
+                {
+                    title: '💼 Seu Negócio',
+                    items: [
+                        { label: 'Nicho', value: getValue('nicho') },
+                        { label: 'Descrição', value: getValue('descricao') },
+                        { label: 'Diferencial', value: getValue('diferencial') || '—' },
+                    ]
+                },
+                {
+                    title: '🎯 Objetivos',
+                    items: [
+                        { label: 'Objetivo', value: getRadio('objetivo') },
+                        { label: 'Público-alvo', value: getValue('publico') },
+                        { label: 'CTA principal', value: getRadio('cta') },
+                    ]
+                },
+                {
+                    title: '🎨 Identidade Visual',
+                    items: [
+                        { label: 'Logotipo', value: getRadio('logo') },
+                        { label: 'Cores', value: getValue('cores') || '—' },
+                        { label: 'Referências', value: getValue('referencias') || '—' },
+                        { label: 'Estilo', value: getCheckboxes('estilo') || '—' },
+                    ]
+                },
+                {
+                    title: '📝 Conteúdo e Estrutura',
+                    items: [
+                        { label: 'Seções', value: getCheckboxes('secoes') },
+                        { label: 'Textos', value: getRadio('textos') },
+                        { label: 'Fotos', value: getRadio('fotos') },
+                        { label: 'Domínio', value: getValue('dominio') || '—' },
+                        { label: 'Redes sociais', value: getValue('redes') || '—' },
+                        { label: 'Observações', value: getValue('observacoes') || '—' },
+                    ]
+                }
+            ];
+
+            let html = '';
+            sections.forEach(section => {
+                html += `<div class="summary-section"><h3>${section.title}</h3><div class="summary-grid">`;
+                section.items.forEach(item => {
+                    const val = item.value || '<span class="summary-empty">Não informado</span>';
+                    html += `<div class="summary-item"><span class="s-label">${item.label}:</span><span class="s-value">${val}</span></div>`;
+                });
+                html += `</div></div>`;
+            });
+
+            document.getElementById('summaryContent').innerHTML = html;
+        }
+
+        // --- Envio via WhatsApp ---
+        document.getElementById('sendBtn').addEventListener('click', () => {
+            const getValue = (id) => {
+                const el = document.getElementById(id);
+                return el ? el.value.trim() : '';
+            };
+
+            const getRadio = (name) => {
+                const checked = document.querySelector(`input[name="${name}"]:checked`);
+                return checked ? checked.value : 'Não informado';
+            };
+
+            const getCheckboxes = (name) => {
+                const checked = document.querySelectorAll(`input[name="${name}"]:checked`);
+                return checked.length > 0 ? Array.from(checked).map(c => c.value).join(', ') : 'Não informado';
+            };
+
+            const message = `📋 *BRIEFING - ESTÚDIO BASALCES*
+━━━━━━━━━━━━━━━━━━━━━
+
+👤 *DADOS DO CLIENTE*
+• Nome: ${getValue('nome')}
+• Empresa: ${getValue('empresa')}
+• E-mail: ${getValue('email')}
+• WhatsApp: ${getValue('whatsapp')}
+• Cidade/UF: ${getValue('cidade') || 'Não informado'}
+
+💼 *SOBRE O NEGÓCIO*
+• Nicho: ${getValue('nicho')}
+• Descrição: ${getValue('descricao')}
+• Diferencial: ${getValue('diferencial') || 'Não informado'}
+
+🎯 *OBJETIVOS DO SITE*
+• Objetivo principal: ${getRadio('objetivo')}
+• Público-alvo: ${getValue('publico')}
+• CTA desejado: ${getRadio('cta')}
+
+🎨 *IDENTIDADE VISUAL*
+• Logotipo: ${getRadio('logo')}
+• Cores preferidas: ${getValue('cores') || 'Sem preferência'}
+• Referências: ${getValue('referencias') || 'Não informou'}
+• Estilo: ${getCheckboxes('estilo')}
+
+📝 *CONTEÚDO E ESTRUTURA*
+• Seções desejadas: ${getCheckboxes('secoes')}
+• Textos: ${getRadio('textos')}
+• Fotos: ${getRadio('fotos')}
+• Domínio: ${getValue('dominio') || 'Não informado'}
+• Redes sociais: ${getValue('redes') || 'Não informou'}
+• Observações: ${getValue('observacoes') || 'Nenhuma'}
+
+━━━━━━━━━━━━━━━━━━━━━
+_Briefing enviado via formulário do site_`;
+
+            const whatsappNumber = '553198447001';
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+            // Abre WhatsApp
+            window.open(whatsappUrl, '_blank');
+
+            // Mostra tela de sucesso
+            form.style.display = 'none';
+            document.getElementById('successScreen').classList.add('active');
+            document.querySelector('.progress-container').style.display = 'none';
+        });
+
+        // --- Máscara simples para WhatsApp ---
+        const whatsappInput = document.getElementById('whatsapp');
+        if (whatsappInput) {
+            whatsappInput.addEventListener('input', (e) => {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length > 11) value = value.slice(0, 11);
+                if (value.length > 6) {
+                    value = `(${value.slice(0,2)}) ${value.slice(2,7)}-${value.slice(7)}`;
+                } else if (value.length > 2) {
+                    value = `(${value.slice(0,2)}) ${value.slice(2)}`;
+                } else if (value.length > 0) {
+                    value = `(${value}`;
+                }
+                e.target.value = value;
+            });
+        }
+    });
+    </script>
+</body>
+</html>
