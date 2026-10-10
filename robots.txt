@@ -1,0 +1,22 @@
+# ========================================
+# ESTÚDIO BASALCES - robots.txt
+# ========================================
+# Este arquivo orienta os mecanismos de busca
+# sobre quais páginas podem ser indexadas.
+
+User-agent: *
+Allow: /
+Disallow: /briefing.html
+Disallow: /*?
+Disallow: /admin/
+
+# Permitir indexação das páginas principais
+Allow: /index.html
+Allow: /politica-de-privacidade.html
+Allow: /termos-de-uso.html
+
+# Sitemap
+Sitemap: https://basalces.digital/sitemap.xml
+
+# Tempo de crawl responsável
+Crawl-delay: 1
