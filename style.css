@@ -602,28 +602,29 @@ HERO
     flex-shrink: 0;
 }
 
-/* Theme Toggle */
+/* Theme Toggle - CORRIGIDO */
 .theme-toggle {
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: none;
+    border: 1px solid rgba(26, 26, 26, 0.15);
     border-radius: 50px;
-    width: 44px;
-    height: 28px;
+    width: 48px;
+    height: 30px;
     position: relative;
     cursor: pointer;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     color: #1A1A1A;
+    padding: 0;
 }
 
 .theme-toggle:hover {
-    background: rgba(255, 255, 255, 0.6);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .theme-toggle .icon-sun,
@@ -632,24 +633,28 @@ HERO
     top: 50%;
     transform: translateY(-50%);
     transition: all 0.3s ease;
+    font-size: 14px;
 }
 
 .theme-toggle .icon-sun {
     opacity: 1;
+    left: 8px;
 }
 
 .theme-toggle .icon-moon {
     opacity: 0;
+    right: 8px;
 }
 
 body.dark-mode .theme-toggle {
-    background: rgba(45, 45, 45, 0.4);
+    background: rgba(45, 45, 45, 0.6);
+    border: 1px solid rgba(250, 248, 246, 0.2);
     color: #FAFAF8;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 body.dark-mode .theme-toggle:hover {
-    background: rgba(45, 45, 45, 0.6);
+    background: rgba(45, 45, 45, 0.8);
 }
 
 body.dark-mode .theme-toggle .icon-sun {
@@ -658,21 +663,6 @@ body.dark-mode .theme-toggle .icon-sun {
 
 body.dark-mode .theme-toggle .icon-moon {
     opacity: 1;
-}
-
-.theme-toggle::before {
-    content: '☀️';
-    position: absolute;
-    left: 4px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 14px;
-    transition: all 0.3s ease;
-}
-
-body.dark-mode .theme-toggle::before {
-    content: '🌙';
-    left: 24px;
 }
 
 .whatsapp-header {
@@ -1064,7 +1054,7 @@ body.dark-mode .portfolio-image {
 }
 
 .comparison-list li::before {
-    content: '';
+    content: '✗';
     color: #C53678;
     font-weight: 800;
     font-size: 1.1rem;
@@ -1219,7 +1209,7 @@ body.dark-mode .portfolio-image {
 }
 
 /* ========================================
-PRICING - NOVA ESTRUTURA ESTRATÉGICA
+PRICING - ESTRUTURA CORRIGIDA
 ======================================== */
 .pricing-wrapper {
     margin-top: 4rem;
@@ -1266,44 +1256,38 @@ PRICING - NOVA ESTRUTURA ESTRATÉGICA
     50% { transform: translateX(-50%) translateY(-10px); }
 }
 
-/* Preço parcelado em destaque */
-.price-installments {
+/* Preço PIX - DESTAQUE PRINCIPAL */
+.price-main {
     margin: 2rem 0 1.5rem;
-    padding: 2rem 1.5rem;
+    padding: 2.5rem 1.5rem;
     background: linear-gradient(135deg, #FFF8F5 0%, #FFFFFF 100%);
-    border-radius: 16px;
-    border: 2px solid #FF5841;
+    border-radius: 20px;
+    border: 3px solid #FF5841;
     text-align: center;
+    box-shadow: 0 10px 30px rgba(255, 88, 65, 0.15);
 }
 
-.price-installments-value {
+.price-main-value {
     display: block;
-    font-size: 3.5rem;
+    font-size: 4.5rem;
     font-weight: 800;
-    color: #FF5841;
+    color: #1A1A1A;
     line-height: 1;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
+    letter-spacing: -0.02em;
 }
 
-.price-installments-period {
+.price-main-period {
     display: block;
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: #5A5A5A;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    margin-bottom: 0.5rem;
 }
 
-.price-installments-note {
-    display: block;
-    font-size: 0.8rem;
-    color: #888;
-    font-style: italic;
-}
-
-/* Preço PIX como alternativa econômica */
-.price-pix {
+/* Preço parcelado - ALTERNATIVA SECUNDÁRIA (menor) */
+.price-installments-alt {
     margin: 1.5rem 0 2rem;
     padding: 1.5rem;
     background: #F5F3EF;
@@ -1312,7 +1296,7 @@ PRICING - NOVA ESTRUTURA ESTRATÉGICA
     border-left: 4px solid #C53678;
 }
 
-.price-pix-label {
+.price-installments-alt-label {
     display: block;
     font-size: 0.9rem;
     color: #5A5A5A;
@@ -1320,31 +1304,28 @@ PRICING - NOVA ESTRUTURA ESTRATÉGICA
     font-weight: 600;
 }
 
-.price-pix-value {
+.price-installments-alt-value {
     display: block;
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     font-weight: 800;
     color: #1A1A1A;
     line-height: 1;
     margin-bottom: 0.3rem;
 }
 
-.price-pix-period {
+.price-installments-alt-period {
     display: block;
     font-size: 0.9rem;
     color: #5A5A5A;
-    margin-bottom: 0.5rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
 }
 
-.price-pix-savings {
-    display: inline-block;
-    background: #C53678;
-    color: white;
-    padding: 0.4rem 1rem;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    margin-top: 0.5rem;
+.price-installments-alt-note {
+    display: block;
+    font-size: 0.8rem;
+    color: #888;
+    font-style: italic;
 }
 
 .renewal-note {
@@ -1497,77 +1478,6 @@ PRICING - NOVA ESTRUTURA ESTRATÉGICA
 }
 
 /* ========================================
-COMPARTILHAR - ÍCONES REDONDOS ELEGANTES
-======================================== */
-.share-section {
-    background: #FAFAF8;
-    padding: 4rem 0;
-    border-top: 1px solid rgba(26, 26, 26, 0.1);
-}
-
-.share-card {
-    max-width: 700px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.share-card h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-}
-
-.share-card p {
-    margin-bottom: 2rem;
-    font-size: 1.05rem;
-}
-
-.share-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-/* Botões de ícone redondos */
-.share-icon-btn {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.share-icon-btn:hover {
-    transform: translateY(-4px) scale(1.08);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-}
-
-.share-icon-btn:active {
-    transform: translateY(-2px) scale(1.02);
-}
-
-.share-icon-btn.whatsapp { background: #25D366; }
-.share-icon-btn.linkedin { background: #0077b5; }
-.share-icon-btn.twitter { background: #000000; }
-.share-icon-btn.facebook { background: #1877F2; }
-.share-icon-btn.telegram { background: #0088cc; }
-
-/* Dark mode para ícones de compartilhamento */
-body.dark-mode .share-icon-btn {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-}
-
-body.dark-mode .share-icon-btn:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-}
-
-/* ========================================
 FOOTER PROFISSIONAL (DARK)
 ======================================== */
 .footer {
@@ -1652,6 +1562,8 @@ FOOTER PROFISSIONAL (DARK)
     transition: all 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.1);
     text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 700;
 }
 
 .social-link:hover {
@@ -1699,22 +1611,39 @@ FOOTER PROFISSIONAL (DARK)
     line-height: 1.5;
 }
 
-/* Ícones de compartilhamento no footer */
-.footer-share-icons {
+/* Botões de compartilhamento do footer - MENORES */
+.footer-share-btns {
     display: flex;
-    gap: 0.8rem;
     flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
-.footer-share-icons .share-icon-btn {
-    width: 44px;
-    height: 44px;
+.share-btn-small {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.5rem 0.9rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    line-height: 1;
 }
 
-.footer-share-icons .share-icon-btn svg {
-    width: 18px;
-    height: 18px;
+.share-btn-small:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
+
+.share-btn-small.whatsapp { background: #25D366; }
+.share-btn-small.linkedin { background: #0077b5; }
+.share-btn-small.twitter { background: #000000; }
+.share-btn-small.facebook { background: #1877F2; }
+.share-btn-small.telegram { background: #0088cc; }
 
 .footer-divider {
     height: 1px;
@@ -1838,10 +1767,6 @@ body.dark-mode .logo {
     color: #FAFAF8 !important;
 }
 
-body.dark-mode .theme-toggle {
-    border-color: #FAFAF8;
-}
-
 body.dark-mode .bg-white {
     background-color: #242424;
 }
@@ -1859,38 +1784,35 @@ body.dark-mode .pricing-card {
     background: #2D2D2D;
 }
 
-body.dark-mode .price-installments {
+body.dark-mode .price-main {
     background: linear-gradient(135deg, #2D2624 0%, #2D2D2D 100%);
     border-color: #FF5841;
 }
 
-body.dark-mode .price-installments-value {
-    color: #FF5841;
+body.dark-mode .price-main-value {
+    color: #FAFAF8;
 }
 
-body.dark-mode .price-installments-period {
+body.dark-mode .price-main-period {
     color: #B8B8B8;
 }
 
-body.dark-mode .price-installments-note {
-    color: #888;
-}
-
-body.dark-mode .price-pix {
+body.dark-mode .price-installments-alt {
     background: #242424;
     border-left-color: #C53678;
 }
 
-body.dark-mode .price-pix-label {
-    color: #B8B8B8;
-}
-
-body.dark-mode .price-pix-value {
+body.dark-mode .price-installments-alt-value {
     color: #FAFAF8;
 }
 
-body.dark-mode .price-pix-period {
+body.dark-mode .price-installments-alt-label,
+body.dark-mode .price-installments-alt-period {
     color: #B8B8B8;
+}
+
+body.dark-mode .price-installments-alt-note {
+    color: #888;
 }
 
 body.dark-mode .renewal-note {
@@ -1953,14 +1875,6 @@ body.dark-mode .testimonial-author {
 }
 
 body.dark-mode .timeline-content p {
-    color: #B8B8B8;
-}
-
-body.dark-mode .share-card h2 {
-    color: #FAFAF8;
-}
-
-body.dark-mode .share-card p {
     color: #B8B8B8;
 }
 
@@ -2067,12 +1981,12 @@ body.dark-mode .desktop-nav a:hover {
         padding: 3rem 1.5rem;
     }
 
-    .price-installments-value {
-        font-size: 2.5rem;
+    .price-main-value {
+        font-size: 3rem;
     }
 
-    .price-pix-value {
-        font-size: 2rem;
+    .price-installments-alt-value {
+        font-size: 1.5rem;
     }
 
     .stats-grid,
@@ -2111,15 +2025,6 @@ body.dark-mode .desktop-nav a:hover {
         font-size: 1.3rem;
         bottom: 20px;
         left: 20px;
-    }
-
-    .share-buttons {
-        gap: 0.8rem;
-    }
-
-    .share-icon-btn {
-        width: 50px;
-        height: 50px;
     }
 
     .section {

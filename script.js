@@ -2,7 +2,7 @@
 // ESTÚDIO BASALCES - SCRIPT PRINCIPAL
 // ========================================
 document.addEventListener('DOMContentLoaded', () => {
-    // --- 1. Theme Toggle (Dark Mode) ---
+    // --- 1. Theme Toggle (Dark Mode) - CORRIGIDO ---
     const themeToggle = document.getElementById('themeToggle');
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
         link.href = `https://wa.me/${whatsappNumber}?text=${message}`;
     });
 
-    // --- 8. Share Buttons (Ícones Redondos) ---
+    // --- 8. Share Buttons ---
     const currentUrl = window.location.href;
     const shareText = encodeURIComponent(`Acabei de conhecer o Estúdio Basalces — sites profissionais com design autoral e suporte humano. Recomendo!`);
     const shareUrlText = encodeURIComponent(currentUrl);
